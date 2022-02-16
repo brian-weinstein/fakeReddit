@@ -30,7 +30,4 @@ class ApplicationController < ActionController::Base
         !current_user.nil?
     end
 
-    def is_moderator?(sub)
-        current_user == sub.moderator
-    end
 end

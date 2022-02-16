@@ -19,6 +19,10 @@ class User < ApplicationRecord
         foreign_key: :moderator_id,
         dependent: :destroy
 
+    has_many :posts,
+        foreign_key: :author_id,
+        dependent: :destroy
+
     def self.find_by_credentials(name,password)
         user = User.find_by(name: name)
         if user.nil?
@@ -35,6 +39,10 @@ class User < ApplicationRecord
         self.session_token = self.generate_session_token
         self.save!
         self.session_token
+    end
+
+    def is_moderator?(sub)
+        self == sub.moderator
     end
 
     private

@@ -4,9 +4,10 @@
 
 <div id="subs">
   <% @subs.each do |sub| %>
-    <%= render sub %>
     <p>
-      <%= link_to "Show this subreddit", sub %>
+      <%= link_to sub.title, sub %>
+      <br>
+      <small><%= sub.description %></small>
     </p>
   <% end %>
 </div>
