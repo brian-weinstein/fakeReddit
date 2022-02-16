@@ -1,0 +1,12 @@
+<%= form_tag( session_url , local: true) do %>
+
+    <% flash.each do |key, value| %>
+        <%= content_tag :div, value, class: "flash #{key}" %>
+    <% end %>
+
+    <h2>Login</h2>
+    Username: <%= text_field_tag "user[name]", "", style: "display: block" %>
+    Password: <%= password_field_tag "user[password]", "", style: "display: block" %>
+
+<%= submit_tag 'LOGIN' %>
+<% end %>

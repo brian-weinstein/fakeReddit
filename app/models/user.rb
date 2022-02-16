@@ -11,7 +11,7 @@
 #
 class User < ApplicationRecord
     has_secure_password
-    validates :password, length: {minimum: 6}
+    validates :password, length: {minimum: 6, allow_nil: true}
     validates :name, presence: true, uniqueness: true
     after_initialize :ensure_session_token
 
