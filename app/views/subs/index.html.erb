@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>FakeReddit</h1>
+
+<div id="subs">
+  <% @subs.each do |sub| %>
+    <%= render sub %>
+    <p>
+      <%= link_to "Show this subreddit", sub %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Create a new Subreddit", new_sub_path %>

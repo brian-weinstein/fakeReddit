@@ -15,6 +15,10 @@ class User < ApplicationRecord
     validates :name, presence: true, uniqueness: true
     after_initialize :ensure_session_token
 
+    has_many :subs,
+        foreign_key: :moderator_id,
+        dependent: :destroy
+
     def self.find_by_credentials(name,password)
         user = User.find_by(name: name)
         if user.nil?

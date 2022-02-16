@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_15_172914) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_16_154627) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "subs", force: :cascade do |t|
+    t.text "title", null: false
+    t.text "description", null: false
+    t.integer "moderator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["moderator_id"], name: "index_subs_on_moderator_id"
+    t.index ["title"], name: "index_subs_on_title", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.text "name", null: false

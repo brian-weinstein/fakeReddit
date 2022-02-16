@@ -11,6 +11,13 @@
   </head>
 
   <body>
+    <% if !logged_in?%>
+      <%= link_to "Sign In", new_session_url%>
+      <%= link_to "Create Account", new_user_url%>
+    <% else%>
+      <%= current_user.name %>
+      <%= button_to "Logout", session_url, method: "delete" %>
+    <%end%>
     <%= yield %>
   </body>
 </html>

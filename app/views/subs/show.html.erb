@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @sub %>
+
+<div>
+  <% if is_moderator?(@sub) %>
+    <%= link_to "Edit this sub", edit_sub_path(@sub) %> |
+  <% end %>
+  <%= link_to "Back to subs", subs_path %>
+
+  <% if is_moderator?(@sub) %>
+    <%= button_to "Destroy this sub", @sub, method: :delete %>
+  <% end %>
+</div>
