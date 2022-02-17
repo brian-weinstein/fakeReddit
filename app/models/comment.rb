@@ -30,4 +30,5 @@ class Comment < ApplicationRecord
     private
     def ensure_post_id!
         self.post_id ||= self.parent_comment.post_id if parent_comment
+    end
 end
