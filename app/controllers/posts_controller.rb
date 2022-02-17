@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :is_author, only: %i[edit update destroy]
-  before_action :require_sub, only: %i[new create]
+  before_action :set_sub, except: %i[show]
 
    # GET /posts/1 or /posts/1.json
   def show
@@ -19,10 +19,11 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = current_user.posts.new(post_params)
+    @post.sub_id = @sub.id
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+        format.html { redirect_to sub_post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +36,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
+        format.html { redirect_to sub_post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,7 +50,7 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_to sub_url(@sub), notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -67,11 +68,10 @@ class PostsController < ApplicationController
 
     def is_author
       return if current_user == @post.author
-      redirect to sub_url(@post.sub)
+      redirect to sub_url(@sub)
     end
-    def require_sub
-      return if params[:sub_id]
-      return if params[:post][:sub_id]
-      redirect_to root_url
+
+    def set_sub
+      @sub = Sub.find(params[:sub_id])
     end
 end

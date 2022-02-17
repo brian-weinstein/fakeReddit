@@ -1,4 +1,4 @@
-<%= form_with(model: post) do |form| %>
+<%= form_with(model: [@sub,post]) do |form| %>
   <% if post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -24,10 +24,6 @@
   <div>
     <%= form.label :content, style: "display: block" %>
     <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.hidden_field :sub_id, value: params[:sub_id] %>
   </div>
 
   <div>
