@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_post, except: %i[show]
 
 
   # GET /comments/1 or /comments/1.json
@@ -17,7 +18,8 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @comment = @post.comments.new(comment_params, author_id: current_user.id)
+    @comment = current_user.comments.new(comment_params)
+    @comment.post_id = @post.id
 
     respond_to do |format|
       if @comment.save
@@ -48,7 +50,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to post_url(@post), notice: "Comment was successfully destroyed." }
+      format.html { redirect_to post_url(@comment.post), notice: "Comment was successfully destroyed." }
       format.json { head :no_content }
     end
   end

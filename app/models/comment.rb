@@ -16,15 +16,20 @@ class Comment < ApplicationRecord
 
     belongs_to :author,
         foreign_key: :author_id,
-        class: :User
+        primary_key: :id,
+        class_name: :User
 
-    belongs_to :post,
+    belongs_to :post
 
     has_many :child_comments,
-        foreign_key: :parent_comment_id
+        foreign_key: :parent_comment_id,
+        primary_key: :id,
+        class_name: :Comment
 
     belongs_to :parent_comment,
         foreign_key: :parent_comment_id,
+        primary_key: :id,
+        class_name: :Comment,
         optional: true
 
     private
