@@ -1,19 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @sub %>
-
+<h1><%= @sub.title %></h1>
+<h5><%= @sub.description %></h5>
+<br>
 <div>
 <% @sub.posts.each do |post| %>
   <%= link_to "#{post.title} by: #{post.author.name}" , post_path(post) %>
 <% end %>
 </div>
-
+<br>
 <div>
   <p>
     <%= link_to "Submit a Post", new_sub_post_url(@sub) %>
   </p>
 </div>
-
+<br>
 <div>
   <% if current_user %>
     <% if current_user.is_moderator?(@sub) %>

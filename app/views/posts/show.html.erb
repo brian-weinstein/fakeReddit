@@ -2,13 +2,16 @@
 
 <h1><%= @post.title %></h1>
 <h4><%= @post.content %></h4>
-By: <%= @post.author.name %>
+<div>By: <%= @post.author.name %> </div>
 
-<h2>Comments:</h2>
-<div><p><%= link_to "Post a new comment", new_post_comment_url(@post) %></div></p>
+<br>
+
+<h3>Comments:</h3>
 <% @post.comments.each do |com| %>
 <div><%= link_to com.content, post_comment_url(@post,com) %></div>
 <% end %>
+
+<div><%= link_to "Post a new comment", new_post_comment_url(@post) %></div>
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |

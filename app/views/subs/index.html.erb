@@ -4,12 +4,12 @@
 
 <div id="subs">
   <% @subs.each do |sub| %>
-    <p>
-      <%= link_to sub.title, sub %>
+    <div class="link">
+      <div class="title"><%= link_to sub.title, sub %></div>
+    </div>
+      <div class="tagline"><%= sub.description %></div>
       <br>
-      <small><%= sub.description %></small>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "Create a new Subreddit", new_sub_path %>
+<div class="morelink"><%= link_to "Create a new Subreddit", new_sub_path %></div>
