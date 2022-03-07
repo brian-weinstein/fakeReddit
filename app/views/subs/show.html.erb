@@ -15,12 +15,14 @@
 </div>
 
 <div>
-  <% if current_user.is_moderator?(@sub) %>
-    <%= link_to "Edit this sub", edit_sub_path(@sub) %> |
+  <% if current_user %>
+    <% if current_user.is_moderator?(@sub) %>
+      <%= link_to "Edit this sub", edit_sub_path(@sub) %> |
+    <% end %>
+
+    <% if current_user.is_moderator?(@sub) %>
+      <%= button_to "Destroy this sub", @sub, method: :delete %>
+    <% end %>
   <% end %>
   <%= link_to "Return to Homepage", subs_path %>
-
-  <% if current_user.is_moderator?(@sub) %>
-    <%= button_to "Destroy this sub", @sub, method: :delete %>
-  <% end %>
 </div>

@@ -68,7 +68,7 @@ class PostsController < ApplicationController
 
     def is_author
       return if current_user == @post.author
-      redirect to sub_url(@sub)
+      redirect_to sub_url(@post.sub)
     end
 
     def set_sub
